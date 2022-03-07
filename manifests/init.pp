@@ -31,8 +31,8 @@ class puppet_operational_dashboards (
  
     if $manage_influxdb {
       class {'influxdb::install':
-        host        => $influxdb_host,
-        port        => $influxdb_port,
+        influxdb_host        => $influxdb_host,
+        influxdb_port        => $influxdb_port,
         initial_org => $initial_org,
       }
 
