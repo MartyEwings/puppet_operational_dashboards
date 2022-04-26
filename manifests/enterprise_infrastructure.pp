@@ -10,6 +10,7 @@
 class puppet_operational_dashboards::enterprise_infrastructure (
   Array[String] $profiles = puppet_operational_dashboards::pe_profiles_on_host(),
 ) {
+  notify {"$profiles":}
   if  $profiles.match(/Master/) != 'undef' {
     include influxdb::profile::toml
   } elsif  $profiles.match(/Datasbase/) != 'undef' {
