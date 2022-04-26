@@ -11,10 +11,11 @@ class puppet_operational_dashboards::enterprise_infrastructure (
   Array[String] $profiles = puppet_operational_dashboards::pe_profiles_on_host(),
 ) {
   notify {"$profiles.match(/Master/)":}
-  
-  if  $profiles.match(/Master/) != 'undef' {
+  $master_match = $profiles.match(/Master/)
+  $datbase_match = $profiles.match(/Database/)
+  if  $master_match != 'undef' {
     include influxdb::profile::toml
-  } elsif  $profiles.match(/Datasbase/) != 'undef' {
+  } elsif $datbase_match  != 'undef' {
     include puppet_operational_dashboards::profile::postgres_access
   }
 }
