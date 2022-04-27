@@ -14,9 +14,11 @@ class puppet_operational_dashboards::enterprise_infrastructure (
   $datbase_match = $profiles.match('Database')
   notify {"master = $master_match":}
   notify {"datbase = $datbase_match":}
-#  if  $master_match != 'undef' {
+  if  $master_match != '[]' {
+  notify {"i have the master profile":}
  #   include influxdb::profile::toml
-  #} elsif $datbase_match  != 'undef' {
+  } elsif $datbase_match  != '[]' {
+  notify {"i have the database profile":}
    # include puppet_operational_dashboards::profile::postgres_access
-  #}
+  }
 }
