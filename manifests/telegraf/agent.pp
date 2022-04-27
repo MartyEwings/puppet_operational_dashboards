@@ -169,6 +169,7 @@ class puppet_operational_dashboards::telegraf::agent (
       ensure  => file,
       content => inline_epp(file('influxdb/telegraf_environment_file.epp'), { token => $token }),
       notify  => [Exec['puppet_influxdb_daemon_reload'], Service['telegraf']],
+      require => Class['telegraf::install'],
     }
   }
   else {
@@ -182,6 +183,7 @@ class puppet_operational_dashboards::telegraf::agent (
         Exec['puppet_influxdb_daemon_reload'],
         Service['telegraf']
       ],
+      require => Class['telegraf::install'],
     }
   }
 
