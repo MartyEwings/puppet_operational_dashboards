@@ -10,15 +10,11 @@
 class puppet_operational_dashboards::enterprise_infrastructure (
   Array[String] $profiles = puppet_operational_dashboards::pe_profiles_on_host(),
 ) {
-  $master_match = $profiles.match('Master')
-  $database_match = $profiles.match('Database')
-    notify {"$master_match":}
-    notify {"$database_match":}
     notify {"$profiles":}
-  if   ($master_match in ['[Master]']) {
+  if   ($profiles in ['Puppet_enterprise::Profile::Master']) {
   notify {"i have the master profile":}
     include influxdb::profile::toml
-  } elsif  ($database_match in ['[Database]']) {
+  } elsif ($profiles in ['Puppet_enterprise::Profile::Database']) {
   notify {"i have the database profile":}
    include puppet_operational_dashboards::profile::postgres_access
   }
