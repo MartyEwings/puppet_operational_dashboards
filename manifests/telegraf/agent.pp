@@ -128,7 +128,7 @@ class puppet_operational_dashboards::telegraf::agent (
   service { 'telegraf':
     ensure  => running,
     require => [
-      Class['telegraf'],
+      Class['telegraf::install'],
       Exec['puppet_influxdb_daemon_reload'],
     ],
   }
