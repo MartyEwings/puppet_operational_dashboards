@@ -11,10 +11,10 @@ class puppet_operational_dashboards::enterprise_infrastructure (
   Array[String] $profiles = puppet_operational_dashboards::pe_profiles_on_host(),
 ) {
     notify {"$profiles":}
-  if   ($profiles in ['Puppet_enterprise::Profile::Master']) {
+  if  ! ($profiles in ['Puppet_enterprise::Profile::Master']) {
   notify {"i have the master profile":}
     include influxdb::profile::toml
-  } elsif ($profiles in ['Puppet_enterprise::Profile::Database']) {
+  } elsif ! ($profiles in ['Puppet_enterprise::Profile::Database']) {
   notify {"i have the database profile":}
    include puppet_operational_dashboards::profile::postgres_access
   }
