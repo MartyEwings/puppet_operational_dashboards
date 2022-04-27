@@ -14,7 +14,7 @@ class puppet_operational_dashboards::enterprise_infrastructure (
   if   ('Puppet_enterprise::Profile::Master' in $profiles) {
   notify {"i have the master profile":}
     include influxdb::profile::toml
-  } elsif  ('Puppet_enterprise::Profile::Database' in $profiles]) {
+  } elsif  ('Puppet_enterprise::Profile::Database' in $profiles) {
   notify {"i have the database profile":}
    include puppet_operational_dashboards::profile::postgres_access
   }
