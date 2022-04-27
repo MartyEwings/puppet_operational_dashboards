@@ -14,6 +14,7 @@ class puppet_operational_dashboards::enterprise_infrastructure (
   $database_match = $profiles.match('Database')
     notify {"$master_match":}
     notify {"$database_match":}
+    notify {"$profiles":}
   if   ($master_match in ['[Master]']) {
   notify {"i have the master profile":}
     include influxdb::profile::toml
