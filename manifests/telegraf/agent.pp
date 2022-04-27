@@ -162,7 +162,6 @@ class puppet_operational_dashboards::telegraf::agent (
     owner   => 'telegraf',
     group   => 'telegraf',
     mode    => '0700',
-    require => Class['telegraf'],
   }
 
   if $token {
